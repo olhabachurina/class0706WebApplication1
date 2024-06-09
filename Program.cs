@@ -1,0 +1,24 @@
+using class0706WebApplication1;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Все сессии работают поверх объекта IDistributedCache, и 
+// ASP.NET Core предоставляет встроенную реализацию IDistributedCache
+builder.Services.AddDistributedMemoryCache();// добавляем IDistributedMemoryCache
+builder.Services.AddSession();  // Добавляем сервисы сессии
+var app = builder.Build();
+
+
+app.UseSession();   // Добавляем middleware-компонент для работы с сессиями
+
+// Добавляем middleware-компоненты в конвейер обработки запроса.
+app.UseFromTenThousandToHundredThousand();//10001-100000
+app.UseFromThousandToTenThousand();//1001-10000
+app.UseFromHundredToThousand();//101-1000
+app.UseFromTwentyToHundred();// 20-100
+app.UseFromElevenToNineteen();//11-19
+app.UseFromOneToTen();//1-10
+app.Run();
+
+
+

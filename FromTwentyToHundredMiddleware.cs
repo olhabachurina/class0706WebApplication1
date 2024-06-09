@@ -1,4 +1,4 @@
-﻿namespace class0706WebApplication1
+namespace class0706WebApplication1
 {
     public class FromTwentyToHundredMiddleware
     {
@@ -6,7 +6,7 @@
 
         public FromTwentyToHundredMiddleware(RequestDelegate next)
         {
-            this._next = next;
+            _next = next;
         }
 
         public async Task Invoke(HttpContext context)
@@ -30,14 +30,28 @@
                 else if (number == 100)
                 {
                     // Выдаем окончательный ответ клиенту
-                    context.Response.ContentType = "text/plain";
-                    await context.Response.WriteAsync("Your number is one hundred");
+                    context.Response.ContentType = "text/html";
+                    await context.Response.WriteAsync($@"
+                <html>
+                <body style='font-family: Arial, sans-serif; color: #333; background: linear-gradient(to right, #f7e99e, #f1c40f); padding: 20px; border: 1px solid #ccc; border-radius: 10px;'>
+                    <marquee>
+                        <h1><span style='color: blue;'>Your number is one hundred</span></h1>
+                    </marquee>
+                </body>
+                </html>");
                 }
                 else if (number == 20)
                 {
                     // Выдаем окончательный ответ клиенту
-                    context.Response.ContentType = "text/plain";
-                    await context.Response.WriteAsync("Your number is twenty");
+                    context.Response.ContentType = "text/html";
+                    await context.Response.WriteAsync($@"
+                <html>
+                <body style='font-family: Arial, sans-serif; color: #333; background: linear-gradient(to right, #f7e99e, #f1c40f); padding: 20px; border: 1px solid #ccc; border-radius: 10px;'>
+                    <marquee>
+                        <h1><span style='color: blue;'>Your number is twenty</span></h1>
+                    </marquee>
+                </body>
+                </html>");
                 }
                 else
                 {
@@ -45,8 +59,15 @@
                     if (number % 10 == 0)
                     {
                         // Выдаем окончательный ответ клиенту
-                        context.Response.ContentType = "text/plain";
-                        await context.Response.WriteAsync("Your number is " + Tens[number / 10 - 2]);
+                        context.Response.ContentType = "text/html";
+                        await context.Response.WriteAsync($@"
+                    <html>
+                    <body style='font-family: Arial, sans-serif; color: #333; background: linear-gradient(to right, #f7e99e, #f1c40f); padding: 20px; border: 1px solid #ccc; border-radius: 10px;'>
+                        <marquee>
+                            <h1><span style='color: blue;'>Your number is {Tens[number / 10 - 2]}</span></h1>
+                        </marquee>
+                    </body>
+                    </html>");
                     }
                     else
                     {
@@ -77,7 +98,7 @@
                     <h1>Incorrect parameter</h1>
                 </marquee>
             </body>
-           </html>");
+            </html>");
             }
         }
     }
